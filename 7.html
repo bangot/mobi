@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="mobile">
+    <h1 id="iphone-name">Iphone</h1>
+    <h3 id="iphone-battery">100</h3>
+    <textarea disabled name="inbox" id="iphone-inbox" cols="30" rows="10" placeholder="Inbox"></textarea>
+    <textarea disabled name="outbox" id="iphone-outbox" cols="30" rows="10" placeholder="Outbox"></textarea>
+    <input type="text" id="iphone-msg" oninput="writeMsg(iphone,this.value)" placeholder="write message here...">
+    <button onclick="sendMess(iphone,nokia)">Send</button>
+</div>
+
+<div class="mobile">
+    <h1 id="nokia-name">Iphone</h1>
+    <h3 id="nokia-battery">100</h3>
+    <textarea disabled name="inbox" id="nokia-inbox" cols="30" rows="10" placeholder="Inbox"></textarea>
+    <textarea disabled name="outbox" id="nokia-outbox" cols="30" rows="10" placeholder="Outbox"></textarea>
+    <input type="text" id="nokia-msg" oninput="writeMsg(nokia,this.value)" placeholder="write message here...">
+    <button onclick="sendMess(nokia,iphone)">Send</button>
+</div>
+
+<script>
+
+    class Mobile {
+        constructor(name) {
+            this.name = name;
+            this.msg ="";
+            this.inbox =[];
+            this.outbox =[];
+            this.battery = 100;
+        }
+
+        writeMsg(msg){
+            this.msg = msg;
+        }
+
+        sendMsg(mobile){
+            if(this.battery <= 0){
+                alert("Vui long sac dien thoai");
+                return;
+            }
+            this.outbox.push(this.msg);
+            mobile.receiveMsg(this.name,this.msg);
+            this.battery-=20;
+        }
+
+        receiveMsg(name,msg){
+            this.inbox.push(msg);
+            console.log("You got a message from " + name);
+        }
+</script>
+</body>
+</html>
